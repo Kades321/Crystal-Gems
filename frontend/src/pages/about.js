@@ -25,13 +25,13 @@ export function aboutPage() {
       <div class="about-hero-content">
         <p class="section-label scroll-reveal">— Our Story</p>
         <h2 class="section-title scroll-reveal" data-delay="80">
-          Lorem Ipsum<br>Dolor Sit Amet
+          About Rhett's<br>
         </h2>
         <p class="about-body scroll-reveal" data-delay="160">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum. Donec in efficitur leo, in commodo orci. Mauris malesuada facilisis augue, at commodo risus feugiat sit amet.
+          Rhett’s offers printing and photography services such as photo printing, custom T-shirt printing, ID documentation, event photography, and lamination. The business focuses on providing high-quality and reliable services to help customers print, preserve, and customize their memories and important documents.
         </p>
         <p class="about-body scroll-reveal" data-delay="220" style="margin-top:1rem;">
-          Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Proin vel ante a orci tempus eleifend ut et magna. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Rhett’s is a small business created with the goal of providing quality products and good service to customers. The business started from a simple idea of making everyday needs more accessible and reliable for people in the community. Through dedication, hard work, and a focus on customer satisfaction, Rhett’s aims to grow and build trust with its customers. The business continues to improve its services while maintaining its core values of quality, honesty, and commitment.
         </p>
       </div>
     </div>

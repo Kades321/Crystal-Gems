@@ -34,7 +34,7 @@ export function contactsPage() {
           </div>
           <div class="contact-detail-item">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" class="contact-icon"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            <span>hello@rhetts.com</span>
+            <span>rhetts@gmail.com</span>
           </div>
         </div>
       </div>

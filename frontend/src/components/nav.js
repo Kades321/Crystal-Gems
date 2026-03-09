@@ -1,7 +1,9 @@
 export function renderNav() {
   return `
   <nav id="main-nav">
-    <a href="/" data-link class="nav-logo">Rhett's</a>
+    <a href="/" class="nav-logo" data-link>
+  <img src="/logo.png" alt="Rhett's" style="height: 65px; width: auto;" />
+      </a>
     <ul class="nav-links">
       <li><a href="/" data-link class="nav-link">Home</a></li>
       <li><a href="/services" data-link class="nav-link">Services</a></li>

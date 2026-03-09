@@ -3,7 +3,7 @@ export function renderFooter() {
   <footer>
     <div class="footer-inner">
       <div class="footer-brand-col">
-        <div class="footer-logo">Rhett's</div>
+        <img src="/logo.png" alt="Rhett's" style="height: 60px; width: auto; opacity: 0.9;" />
         <p class="footer-tagline">Printing your memories<br>since day one.</p>
         <div class="footer-socials">
           <a href="#" aria-label="Facebook">

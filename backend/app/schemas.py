@@ -27,3 +27,21 @@ class ServiceResponse(ServiceBase):
 
     class Config:
         from_attributes = True
+
+class InquiryBase(BaseModel):
+    first_name: str
+    last_name: str
+    email: str
+    phone: Optional[str] = None
+    service: str
+    message: str
+
+class InquiryCreate(InquiryBase):
+    pass
+
+class InquiryResponse(InquiryBase):
+    id: int
+    created_at: Any # Using Any for datetime serialization for now
+
+    class Config:
+        from_attributes = True

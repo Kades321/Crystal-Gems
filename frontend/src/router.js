@@ -35,7 +35,7 @@ function render(path) {
   initScrollReveal();
 }
 
-function initScrollReveal() {
+export function initScrollReveal() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {

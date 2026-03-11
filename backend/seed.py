@@ -1,8 +1,33 @@
-from app.database import SessionLocal, engine
+from app.database import SessionLocal, engine, Base
 from app import models
 
-# Sample data based on current frontend
+# Sample data based on new requirements
 INITIAL_SERVICES = [
+    # Photography
+    {
+        "category_id": "photography",
+        "title": "Portrait Session",
+        "description": "Professional 1-hour studio session. Perfect for graduation, corporate, or personal branding. Includes 5 retouched digital photos.",
+        "price": 1500.0,
+        "type": "service",
+        "tag": "Popular"
+    },
+    {
+        "category_id": "photography",
+        "title": "Product Photography",
+        "description": "High-quality images for your e-commerce or menu. Clean white background or lifestyle setup available.",
+        "price": 300.0,
+        "type": "service",
+        "tag": None
+    },
+    {
+        "category_id": "photography",
+        "title": "Family Package",
+        "description": "Capture precious memories with the whole family. Outdoor or indoor locations. Includes a free 8R print.",
+        "price": 2500.0,
+        "type": "service",
+        "tag": "New"
+    },
     # Printing Services
     {
         "category_id": "printing",
@@ -22,32 +47,24 @@ INITIAL_SERVICES = [
     },
     {
         "category_id": "printing",
-        "title": "Large Format",
+        "title": "Large Format Banners",
         "description": "Tarpaulins, posters, and banners up to 10ft wide. Weatherproof materials available.",
         "price": 500.0,
         "type": "product",
         "tag": "New"
     },
-    # ID & Event Documentation
+    # Event Documentation
     {
-        "category_id": "id-docs",
-        "title": "Passport & Visa Photos",
-        "description": "Government-compliant passport photos. Printed and ready in 15 minutes.",
-        "price": 150.0,
+        "category_id": "event-docs",
+        "title": "Full Event Coverage",
+        "description": "Comprehensive photo and video coverage for weddings, birthdays, or corporate events. Minimum 4 hours.",
+        "price": 8000.0,
         "type": "service",
         "tag": "Fast"
     },
     {
-        "category_id": "id-docs",
-        "title": "School & Company IDs",
-        "description": "PVC card printing with custom layouts. Laminated, durable, and professional.",
-        "price": 100.0,
-        "type": "product",
-        "tag": None
-    },
-    {
-        "category_id": "id-docs",
-        "title": "Event Photo Booths",
+        "category_id": "event-docs",
+        "title": "Instant Print Photo Booth",
         "description": "On-site instant print photo booths for events. Includes backdrop, props, and operator.",
         "price": 3500.0,
         "type": "service",
@@ -56,18 +73,22 @@ INITIAL_SERVICES = [
 ]
 
 def seed_db():
+    # Create tables if they don't exist
+    Base.metadata.create_all(bind=engine)
     db = SessionLocal()
-    # Check if we already have services
-    if db.query(models.Service).count() > 0:
-        print("Database already seeded.")
-        return
+    
+    # Clear existing data to ensure clean slate
+    print("Clearing existing services...")
+    db.query(models.Service).delete()
+    db.commit()
 
+    print("Seeding new services...")
     for service_data in INITIAL_SERVICES:
         service = models.Service(**service_data)
         db.add(service)
     
     db.commit()
-    print("Database successfully seeded!")
+    print("Database successfully seeded with new services!")
     db.close()
 
 if __name__ == "__main__":

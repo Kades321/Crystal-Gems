@@ -29,8 +29,7 @@ def send_contact_email(inquiry: models.Inquiry):
         msg['From'] = settings.SMTP_USER
         msg['To'] = settings.BUSINESS_EMAIL
 
-        with smtplib.SMTP(settings.SMTP_SERVER, settings.SMTP_PORT) as server:
-            server.starttls()
+        with smtplib.SMTP_SSL(settings.SMTP_SERVER, settings.SMTP_PORT) as server:
             server.login(settings.SMTP_USER, settings.SMTP_PASSWORD)
             server.send_message(msg)
         print("Inquiry email sent successfully.")

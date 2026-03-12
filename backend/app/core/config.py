@@ -1,14 +1,16 @@
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
-    DATABASE_URL: str = "sqlite:///./crystal_gems.db"
+    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
+
+    DATABASE_URL: str
     APP_NAME: str = "Crystal Gems API"
     
     # SMTP Settings (Optional for local testing)
     SMTP_SERVER: str = "smtp.gmail.com"
     SMTP_PORT: int = 465
-    SMTP_USER: str = "siniganghakdog11@gmail.com"
-    SMTP_PASSWORD: str = "vfia wgrh dxqn wgod"
-    BUSINESS_EMAIL: str = "siniganghakdog11@gmail.com"
+    SMTP_USER: str = ""
+    SMTP_PASSWORD: str = ""
+    BUSINESS_EMAIL: str = ""
 
 settings = Settings()

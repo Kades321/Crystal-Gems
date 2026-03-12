@@ -5,6 +5,7 @@ class Settings(BaseSettings):
 
     DATABASE_URL: str
     APP_NAME: str = "Crystal Gems API"
+    FRONTEND_URL: str = "http://localhost:5173"
     
     # SMTP Settings (Optional for local testing)
     SMTP_SERVER: str = "smtp.gmail.com"

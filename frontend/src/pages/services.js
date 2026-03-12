@@ -26,7 +26,7 @@ export function servicesPage() {
       if (currentFilters.max_price) params.append('max_price', currentFilters.max_price);
       if (currentFilters.type) params.append('service_type', currentFilters.type);
 
-      const response = await fetch(`http://localhost:8000/services/?${params.toString()}`);
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/services/?${params.toString()}`);
       if (!response.ok) throw new Error('Failed to fetch services');
       const services = await response.json();
 

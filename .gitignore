@@ -12,3 +12,4 @@ backend/app/core/config.py
 # Python cache
 __pycache__/
 *.pyc
+.vscode/

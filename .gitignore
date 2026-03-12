@@ -1,2 +1,15 @@
+# Dependencies
 frontend/node_modules/
 frontend/package-lock.json
+
+# Environment & secrets
+backend/.env
+backend/app/core/config.py
+
+# Database
+*.db
+
+# Python cache
+__pycache__/
+*.pyc
+.vscode/

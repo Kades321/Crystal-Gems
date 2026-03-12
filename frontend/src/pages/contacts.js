@@ -1,6 +1,54 @@
 import { renderFooter } from '../components/footer.js';
 
 export function contactsPage() {
+  window.submitContactForm = async (btn) => {
+    const originalText = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+
+    const formData = {
+      first_name: document.getElementById('first_name').value,
+      last_name: document.getElementById('last_name').value,
+      email: document.getElementById('email').value,
+      phone: document.getElementById('phone').value || null,
+      service: document.getElementById('service').value,
+      message: document.getElementById('message').value
+    };
+
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/contacts/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (!response.ok) throw new Error('Failed to send message');
+
+      btn.textContent = 'Message Sent ✓';
+      btn.style.background = 'var(--accent)';
+
+      // Reset form
+      document.querySelectorAll('.form-input, .form-select').forEach(el => el.value = '');
+
+      setTimeout(() => {
+        btn.textContent = originalText;
+        btn.style.background = '';
+        btn.disabled = false;
+      }, 5000);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      btn.textContent = 'Error! Try Again';
+      btn.style.background = '#e74c3c';
+      setTimeout(() => {
+        btn.textContent = originalText;
+        btn.style.background = '';
+        btn.disabled = false;
+      }, 3000);
+    }
+  };
+
   return `
   <!-- PAGE HEADER -->
   <div class="page-header">
@@ -43,44 +91,44 @@ export function contactsPage() {
       <div class="contact-form-block scroll-reveal" data-delay="150">
         <p class="section-label">— Send a Message</p>
         <h2 class="section-title" style="margin-bottom:2.5rem;">Contact us<br>by Email</h2>
-        <div class="contact-form">
+        <form class="contact-form" onsubmit="event.preventDefault(); window.submitContactForm(this.querySelector('.btn-primary'))">
           <div class="form-row-2">
             <div class="form-row">
               <label class="form-label">First Name</label>
-              <input type="text" class="form-input" placeholder="Juan" />
+              <input type="text" id="first_name" class="form-input" placeholder="Juan" required />
             </div>
             <div class="form-row">
               <label class="form-label">Last Name</label>
-              <input type="text" class="form-input" placeholder="dela Cruz" />
+              <input type="text" id="last_name" class="form-input" placeholder="dela Cruz" required />
             </div>
           </div>
           <div class="form-row">
             <label class="form-label">Email Address</label>
-            <input type="email" class="form-input" placeholder="juan@email.com" />
+            <input type="email" id="email" class="form-input" placeholder="juan@email.com" required />
           </div>
           <div class="form-row">
             <label class="form-label">Phone Number (optional)</label>
-            <input type="tel" class="form-input" placeholder="+63 9XX XXX XXXX" />
+            <input type="tel" id="phone" class="form-input" placeholder="+63 9XX XXX XXXX" />
           </div>
           <div class="form-row">
             <label class="form-label">Service Needed</label>
-            <select class="form-select">
+            <select id="service" class="form-select" required>
               <option value="">Select a service...</option>
-              <option>Photo Printing</option>
-              <option>T-Shirt Printing</option>
-              <option>ID Documentation</option>
-              <option>Event Photography</option>
-              <option>Finishing & Lamination</option>
-              <option>Preservation</option>
-              <option>Other</option>
+              <option value="Photo Printing">Photo Printing</option>
+              <option value="T-Shirt Printing">T-Shirt Printing</option>
+              <option value="ID Documentation">ID Documentation</option>
+              <option value="Event Photography">Event Photography</option>
+              <option value="Finishing & Lamination">Finishing & Lamination</option>
+              <option value="Preservation">Preservation</option>
+              <option value="Other">Other</option>
             </select>
           </div>
           <div class="form-row">
             <label class="form-label">Message</label>
-            <textarea class="form-input form-textarea" rows="5" placeholder="Describe your project or inquiry..."></textarea>
+            <textarea id="message" class="form-input form-textarea" rows="5" placeholder="Describe your project or inquiry..." required></textarea>
           </div>
-          <button class="btn-primary" style="margin-top:.5rem;" onclick="this.textContent='Message Sent ✓';this.style.background='#444';setTimeout(()=>{this.textContent='Send Message';this.style.background='';},3000)">Send Message</button>
-        </div>
+          <button type="submit" class="btn-primary" style="margin-top:.5rem;">Send Message</button>
+        </form>
       </div>
     </div>
   </section>

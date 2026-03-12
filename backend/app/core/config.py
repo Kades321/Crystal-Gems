@@ -15,3 +15,4 @@ class Settings(BaseSettings):
     BUSINESS_EMAIL: str = ""
 
 settings = Settings()
+#

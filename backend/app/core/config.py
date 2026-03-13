@@ -6,6 +6,13 @@ class Settings(BaseSettings):
     DATABASE_URL: str
     APP_NAME: str = "Crystal Gems API"
     FRONTEND_URL: str = "http://localhost:5173"
+
+    JWT_SECRET_KEY: str = "change-me-in-production"
+    JWT_ALGORITHM: str = "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
+
+    ADMIN_EMAIL: str = "admin@crystalgems.local"
+    ADMIN_PASSWORD: str = "admin123"
     
     # SMTP Settings (Optional for local testing)
     SMTP_SERVER: str = "smtp.gmail.com"
@@ -15,4 +22,3 @@ class Settings(BaseSettings):
     BUSINESS_EMAIL: str = ""
 
 settings = Settings()
-#

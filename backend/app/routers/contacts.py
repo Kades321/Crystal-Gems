@@ -6,6 +6,7 @@ from .. import models, schemas
 import smtplib
 from email.mime.text import MIMEText
 from ..core.config import settings
+from ..auth.dependencies import get_current_admin
 
 router = APIRouter(
     prefix="/contacts",
@@ -49,6 +50,9 @@ def create_inquiry(inquiry: schemas.InquiryCreate, background_tasks: BackgroundT
     return db_inquiry
 
 @router.get("/", response_model=List[schemas.InquiryResponse])
-def get_inquiries(db: Session = Depends(get_db)):
+def get_inquiries(
+    db: Session = Depends(get_db),
+    _: models.AdminUser = Depends(get_current_admin),
+):
     # For tax purposes/admin review
     return db.query(models.Inquiry).all()

@@ -25,7 +25,7 @@ export function renderNav() {
   </div>`;
 }
 
-// Hamburger toggle (called after DOM mount)
+// Hamburger toggle (called after DOM mount) y
 document.addEventListener('click', e => {
   if (e.target.closest('#nav-hamburger')) {
     document.getElementById('nav-mobile')?.classList.toggle('open');

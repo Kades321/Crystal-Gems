@@ -1,5 +1,7 @@
 from app.database import SessionLocal, engine, Base
 from app import models
+from app.core.config import settings
+from app.auth.security import hash_password
 
 # Sample data based on new requirements
 INITIAL_SERVICES = [
@@ -86,6 +88,19 @@ def seed_db():
     for service_data in INITIAL_SERVICES:
         service = models.Service(**service_data)
         db.add(service)
+
+    existing_admin = db.query(models.AdminUser).filter(models.AdminUser.email == settings.ADMIN_EMAIL).first()
+    if existing_admin is None:
+        print("Creating default admin user...")
+        admin = models.AdminUser(
+            email=settings.ADMIN_EMAIL,
+            password_hash=hash_password(settings.ADMIN_PASSWORD),
+            full_name="System Admin",
+            is_active=True,
+        )
+        db.add(admin)
+    else:
+        print("Default admin already exists, skipping admin bootstrap.")
     
     db.commit()
     print("Database successfully seeded with new services!")
